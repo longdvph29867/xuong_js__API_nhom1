@@ -1,5 +1,5 @@
 import slugify from "slugify";
-import Categories from "../models/Categories.js";
+import Categories from "../models/Categorie.js";
 import { categoryValid } from "../validations/categories.js";
 
 export const getAll = async (req, res) => {
