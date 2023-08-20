@@ -1,6 +1,6 @@
 import slugify from "slugify";
 import Categories from "../models/Category.js";
-import Products from "../models/products.js"
+import Products from "../models/Products.js"
 import { categoryValid } from "../validations/categories.js";
 
 export const getAll = async (req, res) => {
