@@ -6,13 +6,13 @@ const productsSchema = new mongoose.Schema({
         require: true,
         minLength: 3,
         maxLength: 255,
-        unique: true,
+        unique: false,
         defaultValue: "product"
     },
     slug: {
         type: String,
-        require: true,
-        unique: true,
+        require: false,
+        unique: false,
         defaultValue: "product"
     },
     price: {
@@ -31,11 +31,11 @@ const productsSchema = new mongoose.Schema({
         type: String,
         require:true,
         defaultValue: "product"
+    },
+    categoryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Categories",
     }
-    // products: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Products"
-    // }
 }, {
     timestamps: true,
     versionKey: false,

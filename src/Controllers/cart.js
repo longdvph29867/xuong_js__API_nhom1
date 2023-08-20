@@ -2,7 +2,10 @@ import Cart from "../models/Cart.js";
 
 export const getAll = async (req, res) => {
     try {
-      const cart = await Cart.find({user: req.params.id});
+      const cart = await Cart.find({user: req.params.id}).populate({
+        path: 'items.product',
+        select: '_id productName slug price image'
+      });
       if (!cart && cart.length === 0) {
         return res.status(404).json({
           message: "Không tìm thấy sp",
@@ -62,4 +65,34 @@ export const create = async (req, res) => {
     });
   }
 };
+
+
+export const remove = async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const productIdToRemove = req.body.productId;
+
+    const updatedCart = await Cart.findOneAndUpdate(
+      { user: userId },
+      { $pull: { items: { _id: productIdToRemove } } },
+      { new: true }
+    );
+    if (!updatedCart) {
+      return res.status(404).json({
+        message: "Không tìm thấy giỏ hàng hoặc sản phẩm trong giỏ hàng",
+      });
+    }
+
+
+    return res.status(200).json({
+      message: "Xoá thành công",
+      data: updatedCart
+    });
+  } catch (error) {
+    res.status(500).json({
+      name: error.name,
+      message: error.message,
+    });
+  }
+};  
 
