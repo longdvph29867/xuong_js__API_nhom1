@@ -3,6 +3,7 @@ import Products from "../models/Products.js";
 import Categories from "../models/Category.js";
 import { productValid } from "../validations/products.js";
 import Cart from "../models/Cart.js";
+import slugify from "slugify";
 
 export const getAll = async (req, res) => {
   try {
@@ -60,7 +61,19 @@ export const getDetail = async (req, res) => {
         })
       }
 
-      const product = await Products.create(req.body);
+    // chuyen name sang slug
+    let data = {...req.body}
+    data.slug = slugify(data.productName, { lower: true})
+
+    // kiểm tra đã tồn tại chưa
+    const prosuctExists = await Products.findOne({slug: data.slug});
+    if (prosuctExists) {
+      return res.status(404).json({
+        message: "Tên sản phẩm đã tồn tại",
+      });
+    }
+
+      const product = await Products.create(data);
       if (!product) {
         return res.status(404).json({
           message: "Tạo Product không thành công",

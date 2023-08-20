@@ -6,13 +6,13 @@ const productsSchema = new mongoose.Schema({
         require: true,
         minLength: 3,
         maxLength: 255,
-        unique: false,
+        unique: true,
         defaultValue: "product"
     },
     slug: {
         type: String,
         require: false,
-        unique: false,
+        unique: true,
         defaultValue: "product"
     },
     price: {
