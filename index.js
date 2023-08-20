@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import { connect } from 'mongoose';
 import router from './src/routers/index.js';
+import cors from "cors";
 dotenv.config();
 
 const PORT = process.env.PORT;
@@ -17,7 +18,7 @@ connect(process.env.URI_DB)
   console.error('Error connecting to MongoDB:', error);
 });
 
-app.use("/", router);
+app.use("/", cors({ origin: '*' }), router);
 
 app.listen(PORT, () => {
     console.log('ok server');
