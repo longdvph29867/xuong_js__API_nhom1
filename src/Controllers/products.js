@@ -1,5 +1,5 @@
-// import slugify from "slugify";
-import Products from "../models/products.js";
+
+import Products from "../models/Products.js";
 import Categories from "../models/Category.js";
 import { productValid } from "../validations/products.js";
 import Cart from "../models/Cart.js";
