@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import { connect } from 'mongoose';
-import router from './routers/index.js';
+import router from './src/routers/index.js';
 dotenv.config();
 
 const PORT = process.env.PORT;
