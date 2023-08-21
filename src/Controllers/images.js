@@ -1,4 +1,4 @@
-import cloudinary from "../../../xuong_js/src/configs/cloudinaryConfig.js";
+import cloudinary from "../configs/cloudinaryConfig.js";
 
 
 
