@@ -15,15 +15,17 @@ const categoriesSchema = new mongoose.Schema({
         unique: true,
         defaultValue: "uncategorized"
     },
-    products: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Products"
-    }
+    products: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Products"
+        }
+    ]
 }, {
     timestamps: true,
     versionKey: false,
     collection: "Categories"
 });
 
-const Categories = mongoose.model("Categorie", categoriesSchema);
+const Categories = mongoose.model("Categories", categoriesSchema);
 export default Categories;

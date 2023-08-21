@@ -11,7 +11,7 @@ const productsSchema = new mongoose.Schema({
     },
     slug: {
         type: String,
-        require: true,
+        require: false,
         unique: true,
         defaultValue: "product"
     },
@@ -31,11 +31,11 @@ const productsSchema = new mongoose.Schema({
         type: String,
         require:true,
         defaultValue: "product"
+    },
+    categoryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Categories",
     }
-    // products: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Products"
-    // }
 }, {
     timestamps: true,
     versionKey: false,

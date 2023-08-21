@@ -1,5 +1,6 @@
 import slugify from "slugify";
-import Categories from "../models/Categorie.js";
+import Categories from "../models/Category.js";
+import Products from "../models/Products.js"
 import { categoryValid } from "../validations/categories.js";
 
 export const getAll = async (req, res) => {
@@ -23,7 +24,7 @@ export const getAll = async (req, res) => {
 
 export const getDetail = async (req, res) => {
   try {
-    const category = await Categories.findOne({slug: req.params.slug});
+    const category = await Categories.findOne({slug: req.params.slug}).populate('products');
     if (!category) {
       return res.status(404).json({
         message: "Không tìm thấy danh mục!",
@@ -133,6 +134,13 @@ export const remove = async (req, res) => {
         message: 'Xoa thất bại',
       })
     }
+
+    // Cập nhật thông tin danh mục trong các sản phẩm thành null
+    await Products.updateMany(
+      { categoryId: req.params.id },
+      { categoryId: null }
+    );
+
     return res.status(200).json({
       message: "Xoá thành công",
       data: data
