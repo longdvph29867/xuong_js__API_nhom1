@@ -7,6 +7,12 @@ export const productValid = Joi.object ({
         "string.min": "Tên danh mục phải có ít nhất 3 ký tự",
         "string.max": "Tên danh mục phải có ít hơn 255 ký tự",
     }),
+    description: Joi.string().required().min(3).max(1500).messages({
+        "string.empty": "Mô tả không để trống",
+        "any.required": "Mô tả là bắt buộc",
+        "string.min": "Mô tả phải có ít nhất 3 ký tự",
+        "string.max": "Mô tả phải có ít hơn 255 ký tự",
+    }),
     price: Joi.number().required().messages({
         "number.empty": "Giá không được để trống",
         "any.required": "Giá là bắt buộc",
@@ -14,5 +20,8 @@ export const productValid = Joi.object ({
     }),
     image: Joi.string().required().messages({
         "string.empty": "Ảnh không để trống",
+    }),
+    categoryId: Joi.required().messages({
+        "any.required": "categoryId là bắt buộc",
     }),
 }).unknown(true);
