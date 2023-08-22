@@ -7,7 +7,7 @@ import routerUsers from './usersRouter.js';
 import routerProducts from './productsRouter.js';
 
 const router = Router();
-
+// router.use("",routerProducts);
 router.use("/categories", routerCategories);
 router.use("/user", routerUsers);
 router.use("/auth", routerAuth);
